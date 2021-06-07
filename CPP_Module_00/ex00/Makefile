@@ -1,14 +1,14 @@
 NAME	=	megaphone
 SRCS	=	megaphone.cpp
-OBJS	= 	$(SRCS:c=o)
 FLAGS	=	-Wall -Wextra -Werror
+OBJS	= 	$(SRCS:cpp=o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	clang++ $(FLAGS) -o $(NAME) $(OBJS)
+	clang++ $(FLAGS) -o $(NAME) $(SRCS)
 
-%.o: %.c
+%.o: %.cpp
 	clang++ $(FLAGS) -c $< -o $@
 
 clean:
