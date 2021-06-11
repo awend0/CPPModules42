@@ -4,15 +4,8 @@
 class	Contact
 {
 	public:
-		int			index;
 		std::string	fields[11];
-
-		Contact(int _index, std::string *_fields)
-		{
-			index = _index;
-			for (int i = 0; i < 11; i++)
-				fields[i] = _fields[i];
-		}
+		int			index;
 		Contact()
 		{
 			index = -1;
@@ -21,23 +14,39 @@ class	Contact
 
 void	cmd_search(Contact *contacts)
 {
-	std::cout << "Index\t\tFirst name\t\tLast name\t\tNick name\n\n";
-	for (int i = 0; i < 8; i++)
+	std::cout << "|   Index  |First name|Last name |Nickname  |\n";
+	for (int j = 0; j < 8; j++)
 	{
-		if (contacts[i].index != -1)
+		if (contacts[j].index != -1)
 		{
-			std::cout	<< contacts[i].index << "\t"
-						<< contacts[i].fields[0] << "\t"
-						<< contacts[i].fields[1] << "\t"
-						<< contacts[i].fields[2] << "\t";
-			std::cout << "\n";
+			std::cout << "|" << std::setw(10) << contacts[j].index + 1;
+			for (int i = 0; i <= 2; i++)
+			{
+				std::cout << "|";
+				if (contacts[j].fields[i].length() > 10)
+					std::cout << contacts[j].fields[i].substr(0, 9) << ".";
+				else
+					std::cout << std::setw(10) << contacts[j].fields[i];
+			}
+			std::cout << "|" << std::endl;
 		}
 	}
 }
 
-void	cmd_add(Contact *contacts)
+void	cmd_add(Contact *contacts, int index)
 {
-	
+	contacts[index].index = index;
+	std::cout << "Please enter new contact first name: "; getline(std::cin, contacts[index].fields[0]); 
+	std::cout << "Please enter new contact last name: "; getline(std::cin, contacts[index].fields[1]); 
+	std::cout << "Please enter new contact nickname: "; getline(std::cin, contacts[index].fields[2]); 
+	std::cout << "Please enter new contact login: "; getline(std::cin, contacts[index].fields[3]); 
+	std::cout << "Please enter new contact postal address: "; getline(std::cin, contacts[index].fields[4]); 
+	std::cout << "Please enter new contact email address: "; getline(std::cin, contacts[index].fields[5]); 
+	std::cout << "Please enter new contact phone number: "; getline(std::cin, contacts[index].fields[6]); 
+	std::cout << "Please enter new contact birthday date: "; getline(std::cin, contacts[index].fields[7]); 
+	std::cout << "Please enter new contact favorite meal: "; getline(std::cin, contacts[index].fields[8]); 
+	std::cout << "Please enter new contact underwear color: "; getline(std::cin, contacts[index].fields[9]); 
+	std::cout << "Please enter new contact darkest secret: "; getline(std::cin, contacts[index].fields[10]);
 }
 
 int main(void)
@@ -48,19 +57,22 @@ int main(void)
 	while (1)
 	{
 		std::string	input;
-		switch (input)
+		std::cout << "phonebook$ ";
+		getline(std::cin, input);
+		system("clear");
+		if (input == "EXIT")
+			exit(0);
+		else if (input == "SEARCH")
+			cmd_search(contacts);
+		else if (input == "ADD")
 		{
-			case "EXIT":
-				exit(0);
-			case "SEARCH"
-				cmd_search()
-				break ;
-			case "ADD"
-				if (counter > 8)
-					exit(0);
-				cmd_add(contacts);
+			if (counter >= 8)
+				std::cout << "No more space in CRAPPY PHONEBOOK T_T\n";
+			else
+			{
+				cmd_add(contacts, counter);
 				counter++;
-				break ;
+			}
 		}
 	}
 }
