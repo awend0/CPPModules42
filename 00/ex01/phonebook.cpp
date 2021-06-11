@@ -1,36 +1,28 @@
-#include "Contact.h"
+#include "Contact.hpp"
+#include <iostream>
+#include <iomanip>
 
-Contact::Contact()
+static void print_all(Contact *phonebook, int size)
 {
-	for (int i = 0 ; i < 10; i++)
+	if (size > 0)
 	{
-		std::cout << Contact::_names[i] << ": ";
-		getline(std::cin, this->_fields[i]);
+		std::cout << "|     Index|First name| Last name|  Nickname|" << std::endl;
+		for (int i = 0; i < size; i++)
+		{
+			std::cout << "|" << std::setw(10) << i;
+			phonebook[i].print();
+		}
 	}
-}
-
-void	Contact::print(void)
-{
-	for (int i = 0; i < 3; i++)
-		std::cout << "|" << std::setw(10) << (this->_fields[i].length() > 10 ? this->_fields[i].substr(0, 9) + "." : this->_fields[i]);
-	std::cout << "|" << std::endl;
-}
-
-void	print_all(std::vector<Contact> phonebook)
-{
-	std::cout << "|     Index|First name| Last name|  Nickname|" << std::endl;
-	for (size_t i = 0; i < phonebook.size(); i++)
-	{
-		std::cout << "|" << std::setw(10) << i;
-		phonebook[i].print();
-	}
+	else
+		std::cout << "Your phonebook is empty right now" << std::endl;
 }
 
 int main(void)
 {
-	std::vector<Contact>	phonebook;
-
+	Contact 	phonebook[8];
 	std::string input;
+	int			size = 0;
+
 	while (1)
 	{
 		std::cout << "phonebook$ ";
@@ -38,13 +30,16 @@ int main(void)
 		if (input == "EXIT")
 			exit(0);
 		else if (input == "SEARCH")
-			print_all(phonebook);
+			print_all(phonebook, size);
 		else if (input == "ADD")
 		{
-			if (phonebook.size() >= 8)
+			if (size >= 8)
 				std::cout << "Crappy phonebook out of memory T_T" << std::endl;
 			else
-				phonebook.push_back(Contact());
+			{
+				phonebook[size] = Contact(10);
+				size++;
+			}
 		}
 		else
 			system("clear");

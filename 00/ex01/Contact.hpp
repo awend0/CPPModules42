@@ -2,11 +2,11 @@
 # define CONTACT_H
 # include <iostream>
 # include <iomanip>
-# include <vector>
 
 class Contact
 {
 	public:
+		Contact(int fields);
 		Contact();
 		void			print(void);
 		std::string		_names[10] = {"First name",
