@@ -2,9 +2,8 @@
 
 std::string	toupper_str(char *str)
 {
-	std::string	ret;
+	std::string	ret = str;
 
-	ret = str;
 	for (size_t i = 0; i < ret.length(); i++)
 		ret[i] = toupper(ret[i]);
 	return (ret);
