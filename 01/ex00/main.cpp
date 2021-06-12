@@ -19,7 +19,7 @@ int    main(void)
 {
 	std::cout << "Now we're going to create Stack Pony" << std::endl;
 	ponyOnTheStack();
-	std::cout << "And now, Heap Stack:" << std::endl;
+	std::cout << "And now, Heap Pony:" << std::endl;
 	ponyOnTheHeap();
 	std::cout << "Done!" << std::endl;
 }
