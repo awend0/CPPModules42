@@ -10,24 +10,24 @@ void	exit_with_error(std::string err)
 
 std::string	str_replace(std::string	str, std::string search, std::string replace)
 {
-	std::stringstream	stream;
-	size_t				j;
-	size_t				slength = search.length();
+	std::string ret("");
+	size_t j;
+	size_t len = search.length();
 
 	for (size_t i = 0; i < str.length(); i++)
 	{
 		j = 0;
-		while (str[i + j] == search[j] && j < slength)
+		while (str[i + j] == search[j] && j < len)
 			j++;
-		if (j == slength)
+		if (j == len)
 		{
-			stream << replace;
+			ret += replace;
 			i += (j - 1);
 		}
 		else
-			stream << str[i];
+			ret += str[i];
 	}
-	return (stream.str());
+	return (ret);
 }
 
 int	main(int argc, char *argv[])
