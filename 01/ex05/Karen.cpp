@@ -1,0 +1,50 @@
+#include "Karen.hpp"
+
+Karen::Karen()
+{
+    this->_messages[0] = "DEBUG";
+    this->_messages[1] = "INFO";
+    this->_messages[2] = "WARNING";
+    this->_messages[3] = "ERROR";
+    this->_functions[0] = &Karen::debug;
+    this->_functions[1] = &Karen::info;
+    this->_functions[2] = &Karen::warning;
+    this->_functions[3] = &Karen::error;
+}
+
+Karen::~Karen()
+{
+}
+
+void Karen::debug()
+{
+    std::cout   << "I love to get extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger." << std::endl
+                << "I just love it!" << std::endl << std::endl;
+}
+
+void Karen::info()
+{
+    std::cout   << "I cannot believe adding extra bacon cost more money." << std::endl
+                << "You don’t put enough! If you did I would not have to ask for it!" << std::endl << std::endl;
+}
+
+void Karen::warning()
+{
+    std::cout   << "I think I deserve to have some extra bacon for free." << std::endl
+                << "I’ve been coming here for years an you just started working here last month." << std::endl << std::endl;
+}
+
+void Karen::error()
+{
+    std::cout   << "This is unacceptable, I want to speak to the manager now." << std::endl << std::endl;
+}
+
+void Karen::complain(std::string level)
+{
+    int tocall = 0;
+
+    while (this->_messages[tocall] != level && tocall != 4)
+        tocall++;
+    if (tocall != 4)
+        (this->*_functions[tocall])();
+}
